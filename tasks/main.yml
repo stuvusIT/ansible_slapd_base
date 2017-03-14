@@ -1,0 +1,5 @@
+---
+- include: facts.yml
+- include: install.yml
+- include: olc-setup.yml
+- include: run.yml

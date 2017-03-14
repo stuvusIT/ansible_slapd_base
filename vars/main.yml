@@ -1,0 +1,3 @@
+---
+olccreated_flag: "{{ flags_dir }}/.olccreated.flag"
+olc_tmp: /tmp/olc.conf

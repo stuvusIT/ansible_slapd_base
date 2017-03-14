@@ -1,0 +1,13 @@
+---
+# This file exposes all relevant role variables as facts.
+- name: Set slapd facts
+  set_fact:
+    run_dir: "{{ run_dir }}"
+    ldapi_socket: "{{ ldapi_socket }}"
+    db_dir: "{{ db_dir }}"
+    olc_dir: "{{ olc_dir }}"
+    flags_dir: "{{ flags_dir }}"
+    schema_dir: "{{ schema_dir }}"
+    slapd_user: "{{ slapd_user }}"
+    slapd_group: "{{ slapd_group }}"
+    olc_rootdn: "{{ olc_rootdn }}"

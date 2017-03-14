@@ -1,0 +1,36 @@
+# {{ ansible_managed }}
+[Unit]
+Description=OpenLDAP server daemon
+After=systemd-networkd-wait-online.service
+OnFailure=unit-failed@%n.service
+
+[Service]
+Type=forking
+ExecStart=/usr/sbin/slapd -u {{ slapd_user }} -g {{ slapd_group }} -F {{ olc_dir }} -h 'ldapi://{{ ldapi_socket | urlencode() | regex_replace('/', '%2F') }} ldap://[::] ldaps://[::]'
+PIDFile={{ run_dir }}/slapd.pid
+SyslogFacility=local4
+# Security
+UMask=0077
+CapabilityBoundingSet=CAP_DAC_OVERRIDE CAP_NET_BIND_SERVICE CAP_SETUID CAP_SETGID
+NoNewPrivileges=true
+InaccessiblePaths=-/home -/root
+ReadWritePaths={{ olc_dir }} {{ db_dir }} {{ run_dir }}
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectKernelTunables=true
+ProtectKernelModules=true
+# Resource configuration
+Nice=-10
+OOMScoreAdjust=-999
+IOSchedulingPriority=0
+CPUSchedulingPolicy=fifo
+CPUSchedulingPriority=99
+# Watchdog
+Restart=always
+TimeoutStartSec=20s
+
+[Install]
+WantedBy=multi-user.target
+
+# vi: syntax=systemd:
