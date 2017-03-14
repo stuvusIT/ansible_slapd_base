@@ -1,0 +1,66 @@
+---
+- name: Install required apt packages
+  apt:
+    name: "{{ item }}"
+  with_items:
+    - slapd
+    - ldap-utils
+  when: ansible_pkg_mgr == "apt"
+
+- name: Install required pacman packages
+  pacman:
+    name: "{{ item }}"
+  with_items:
+    - openldap
+  when: ansible_pkg_mgr == "pacman"
+
+- name: Remove default slapd mdb
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /var/lib/ldap
+    - /var/lib/openldap
+    - /var/lib/slapd
+
+- name: Create new slapd mdb location
+  file:
+    path: "{{ db_dir }}"
+    state: directory
+    owner: "{{ slapd_user }}"
+    group: "{{ slapd_group }}"
+    mode: 0770
+
+- name: Create new slapd OLC location
+  file:
+    path: "{{ olc_dir }}"
+    state: directory
+    owner: "{{ slapd_user }}"
+    group: "{{ slapd_group }}"
+    mode: 0770
+
+- name: Create slapd unit
+  template:
+    src: slapd.service.j2
+    dest: /etc/systemd/system/slapd.service
+    mode: 0644
+  register: unitfile
+
+- name: Enable slapd unit
+  service:
+    name: slapd.service
+    enabled: yes
+
+- name: Create tmpfiles config
+  template:
+    src: tmpfiles.conf.j2
+    dest: /etc/tmpfiles.d/slapd.conf
+  register: tmpfiles
+
+- name: Reload systemd
+  command: /bin/systemctl daemon-reload
+  when: unitfile.changed
+
+- name: Create tmpfiles
+  command: /bin/systemd-tmpfiles --create
+  when: tmpfiles.changed
