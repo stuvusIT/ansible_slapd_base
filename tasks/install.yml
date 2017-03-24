@@ -5,6 +5,7 @@
   with_items:
     - slapd
     - ldap-utils
+    - schema2ldif
   when: ansible_pkg_mgr == "apt"
 
 - name: Install required pacman packages
@@ -12,6 +13,15 @@
     name: "{{ item }}"
   with_items:
     - openldap
+  when: ansible_pkg_mgr == "pacman"
+
+- name: Get schema2ldif
+  get_url:
+    url: "https://raw.githubusercontent.com/fusiondirectory/schema2ldif/master/bin/schema2ldif"
+    dest: /usr/bin/schema2ldif
+    mode: 0755
+    owner: root
+    group: root
   when: ansible_pkg_mgr == "pacman"
 
 - name: Remove default slapd mdb

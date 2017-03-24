@@ -45,6 +45,10 @@
     path: "{{ olc_tmp }}"
     state: absent
 
+- name: Load core schema
+  shell: "schema2ldif {{ schema_dir }}/core.schema | slapadd -b cn=config -F {{ olc_dir }}"
+  when: not olccreated.stat.exists
+
 - name: Create OLC flag
   file:
     path: "{{ olccreated_flag }}"
