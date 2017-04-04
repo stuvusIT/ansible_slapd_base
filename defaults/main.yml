@@ -1,7 +1,7 @@
 ---
 run_dir: /run/slapd
 ldapi_socket: "{{ run_dir }}/ldapi"
-db_dir: /var/db/slapd
+db_dir: /var/lib/slapd
 etc_dir: /etc/ldap
 olc_dir: "{{ etc_dir }}/slapd.d"
 flags_dir: "{{ etc_dir }}"

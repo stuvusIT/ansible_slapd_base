@@ -18,7 +18,7 @@ A dpkg-based Linux distribution.
 The role allows to set a number of variables:
 - `run_dir` - Default: `/run/slapd` - Runtime directory for args file, pid file and ldapi socket
 - `ldapi_socket` - Default: `{{ run_dir }}/ldapi` - ldapi unix socket for local slapd administration
-- `db_dir` - Default: `/var/db/slapd` - Directory for the mdb (which is not created by this roles)
+- `db_dir` - Default: `/var/lib/slapd` - Directory for the mdb (which is not created by this roles)
 - `etc_dir` - Default: `/etc/ldap` - slapd configuration in /etc, usually /etc/ldap or /etc/openldap
 - `olc_dir` - Default: `{{ etc_dir }}/slapd.d` - Path where the LDIF files of the OLC reside
 - `flags_dir` - Default: `{{ etc_dir }}` - Path where this role puts flags about what was done
