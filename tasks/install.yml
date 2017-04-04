@@ -24,15 +24,6 @@
     group: root
   when: ansible_pkg_mgr == "pacman"
 
-- name: Remove default slapd mdb
-  file:
-    path: "{{ item }}"
-    state: absent
-  with_items:
-    - /var/lib/ldap
-    - /var/lib/openldap
-    - /var/lib/slapd
-
 - name: Create new slapd mdb location
   file:
     path: "{{ db_dir }}"
