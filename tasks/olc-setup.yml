@@ -21,7 +21,7 @@
     mode: 0770
 
 - name: Hash OLC password
-  command: "/bin/bash -c '/usr/sbin/slappasswd -n -T /dev/stdin < <(echo -n $password)'"
+  command: "/bin/bash -c '/usr/sbin/slappasswd -c \$6\$%s.16 -n -T /dev/stdin < <(echo -n $password)'"
   environment:
     password: "{{ slapd_olc_rootdn_password | mandatory }}"
   register: hashedPassword
