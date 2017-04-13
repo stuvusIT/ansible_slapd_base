@@ -2,7 +2,7 @@
 
 This role sets up a very basic OpenLDAP slapd with an (almost) empty OLC.
 The slapd is not usable, as no database is created.
-This has to be done by another role.
+This has to be done by another role like [slapd-config](https://github.com/stuvusIT/slapd-config).
 
 The main purpose is to clear all distribution-specific settings of the slapd server.
 
