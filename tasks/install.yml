@@ -51,7 +51,7 @@
 
 - name: Create slapd OLC location
   file:
-    path: "{{ olc_dir }}"
+    path: "{{ slapd_olc_dir }}"
     state: directory
     owner: "{{ slapd_user }}"
     group: "{{ slapd_group }}"

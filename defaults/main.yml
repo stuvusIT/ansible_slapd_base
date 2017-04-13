@@ -1,11 +1,11 @@
 ---
-run_dir: /run/slapd
-ldapi_socket: "{{ run_dir }}/ldapi"
-db_dir: /var/lib/slapd
-etc_dir: /etc/ldap
-olc_dir: "{{ etc_dir }}/slapd.d"
-flags_dir: "{{ etc_dir }}"
-schema_dir: "{{ etc_dir }}/schema"
+slapd_run_dir: /run/slapd
+slapd_ldapi_socket: "{{ slapd_run_dir }}/ldapi"
+slapd_mdb_dir: /var/lib/slapd
+slapd_etc_dir: /etc/ldap
+slapd_olc_dir: "{{ slapd_etc_dir }}/slapd.d"
+global_flags_dir: "{{ slapd_etc_dir }}"
+slapd_schema_dir: "{{ slapd_etc_dir }}/schema"
 slapd_user: openldap
 slapd_group: "{{ slapd_user }}"
-olc_rootdn: cn=root,cn=config
+slapd_olc_rootdn: cn=root,cn=config

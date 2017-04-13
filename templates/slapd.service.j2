@@ -6,15 +6,15 @@ OnFailure=unit-failed@%n.service
 
 [Service]
 Type=forking
-ExecStart=/usr/sbin/slapd -u {{ slapd_user }} -g {{ slapd_group }} -F {{ olc_dir }} -h 'ldapi://{{ ldapi_socket | urlencode() | regex_replace('/', '%2F') }} ldap://[::] ldaps://[::]'
-PIDFile={{ run_dir }}/slapd.pid
+ExecStart=/usr/sbin/slapd -u {{ slapd_user }} -g {{ slapd_group }} -F {{ slapd_olc_dir }} -h 'ldapi://{{ slapd_ldapi_socket | urlencode() | regex_replace('/', '%2F') }} ldap://[::] ldaps://[::]'
+PIDFile={{ slapd_run_dir }}/slapd.pid
 SyslogFacility=local4
 # Security
 UMask=0077
 CapabilityBoundingSet=CAP_DAC_OVERRIDE CAP_NET_BIND_SERVICE CAP_SETUID CAP_SETGID
 NoNewPrivileges=true
 InaccessiblePaths=-/home -/root
-ReadWritePaths={{ olc_dir }} {{ db_dir }} {{ run_dir }}
+ReadWritePaths={{ slapd_olc_dir }} {{ slapd_mdb_dir }} {{ slapd_run_dir }}
 PrivateTmp=true
 PrivateDevices=true
 ProtectSystem=strict

@@ -9,15 +9,15 @@
 # PID and arguments
 #####
 
-pidfile  {{ run_dir }}/slapd.pid
-argsfile {{ run_dir }}/slapd.args
+pidfile  {{ slapd_run_dir }}/slapd.pid
+argsfile {{ slapd_run_dir }}/slapd.args
 
 #####
 # OLC
 #####
 
 database config
-rootdn   {{ olc_rootdn }}
+rootdn   {{ slapd_olc_rootdn }}
 rootpw   {{ hashedPassword.stdout }}
 access   to * by * none
 
