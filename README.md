@@ -15,21 +15,22 @@ A dpkg- or pacman-based Linux distribution.
 
 ## Role Variables
 
-The role allows to set a number of variables:
+The role allows to set a number of variables.
+All variables are required.
 
-| Name                  | Required           | Default                 | Description                                                         |
-|-----------------------|:------------------:|-------------------------|---------------------------------------------------------------------|
-| `run_dir`             | :heavy_check_mark: | `/run/slapd`            | Runtime directory for args file, pid file and ldapi socket          |
-| `ldapi_socket`        | :heavy_check_mark: | `{{ run_dir }}/ldapi`   | ldapi unix socket for local slapd administration                    |
-| `db_dir`              | :heavy_check_mark: | `/var/lib/slapd`        | Directory for the mdb. The directory is created, but the mdb is not |
-| `etc_dir`             | :heavy_check_mark: | `/etc/ldap`             | slapd configuration in /etc, usually /etc/ldap or /etc/openldap     |
-| `olc_dir`             | :heavy_check_mark: | `{{ etc_dir }}/slapd.d` | Path where the LDIF files of the OLC reside                         |
-| `flags_dir`           | :heavy_check_mark: | `{{ etc_dir }}`         | Path where this role puts flags about what was done                 |
-| `schema_dir`          | :heavy_check_mark: | `{{ etc_dir }}/schema`  | Path where the default slapd schemas reside                         |
-| `slapd_user`          | :heavy_check_mark: | `openldap`              | User under which slapd runs                                         |
-| `slapd_group`         | :heavy_check_mark: | `{{ slapd_user }}`      | Group under which slapd runs                                        |
-| `olc_rootdn`          | :heavy_check_mark: | `cn=root,cn=config`     | Rootdn of the OLC                                                   |
-| `olc_rootdn_password` | :heavy_check_mark: |                         | Password for the OLC rootdn                                         |
+| Name                  | Default               | Description                                                         |
+|-----------------------|-----------------------|---------------------------------------------------------------------|
+| `run_dir`             | `/run/slapd`          | Runtime directory for args file, pid file and ldapi socket          |
+| `ldapi_socket`        | `{{run_dir}}/ldapi`   | ldapi unix socket for local slapd administration                    |
+| `db_dir`              | `/var/lib/slapd`      | Directory for the mdb. The directory is created, but the mdb is not |
+| `etc_dir`             | `/etc/ldap`           | slapd configuration in /etc, usually /etc/ldap or /etc/openldap     |
+| `olc_dir`             | `{{etc_dir}}/slapd.d` | Path where the LDIF files of the OLC reside                         |
+| `flags_dir`           | `{{etc_dir}}`         | Path where this role puts flags about what was done                 |
+| `schema_dir`          | `{{etc_dir}}/schema`  | Path where the default slapd schemas reside                         |
+| `slapd_user`          | `openldap`            | User under which slapd runs                                         |
+| `slapd_group`         | `{{slapd_user}}`      | Group under which slapd runs                                        |
+| `olc_rootdn`          | `cn=root,cn=config`   | Rootdn of the OLC                                                   |
+| `olc_rootdn_password` |                       | Password for the OLC rootdn                                         |
 
 All of these variables are exposed as facts for other roles.
 The only exception is `olc_rootdn_password` for security purposes.
