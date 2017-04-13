@@ -15,6 +15,10 @@ galaxy_info:
   - name: Debian
     versions:
     - jessie
+  - name: ArchLinux
+    versions:
+    - all
+    - any
 
   galaxy_tags:
     - slapd
