@@ -16,8 +16,9 @@ A dpkg- or pacman-based Linux distribution.
 ## Role Variables
 
 The role allows to set a number of variables:
+
 | Name                  | Required           | Default                 | Description                                                         |
-|-----------------------|--------------------|-------------------------|---------------------------------------------------------------------|
+|-----------------------|:------------------:|-------------------------|---------------------------------------------------------------------|
 | `run_dir`             | :heavy_check_mark: | `/run/slapd`            | Runtime directory for args file, pid file and ldapi socket          |
 | `ldapi_socket`        | :heavy_check_mark: | `{{ run_dir }}/ldapi`   | ldapi unix socket for local slapd administration                    |
 | `db_dir`              | :heavy_check_mark: | `/var/lib/slapd`        | Directory for the mdb. The directory is created, but the mdb is not |
