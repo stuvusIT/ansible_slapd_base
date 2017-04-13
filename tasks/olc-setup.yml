@@ -8,13 +8,13 @@
 
 - name: Wipe default OLC
   file:
-    path: "{{ olc_dir }}"
+    path: "{{ slapd_olc_dir }}"
     state: absent
   when: not olccreated.stat.exists
 
 - name: Create new slapd OLC location
   file:
-    path: "{{ olc_dir }}"
+    path: "{{ slapd_olc_dir }}"
     state: directory
     owner: "{{ slapd_user }}"
     group: "{{ slapd_group }}"
@@ -23,7 +23,7 @@
 - name: Hash OLC password
   command: "/bin/bash -c '/usr/sbin/slappasswd -n -T /dev/stdin < <(echo -n $password)'"
   environment:
-    password: "{{ olc_rootdn_password | mandatory }}"
+    password: "{{ slapd_olc_rootdn_password | mandatory }}"
   register: hashedPassword
   when: not olccreated.stat.exists
   changed_when: false
@@ -37,7 +37,7 @@
 
 # Not using become the user may be overridden
 - name: Apply basic OLC configuration
-  command: "/usr/bin/sudo -u {{ slapd_user }} /usr/sbin/slaptest -f {{ olc_tmp }} -F {{ olc_dir }}"
+  command: "/usr/bin/sudo -u {{ slapd_user }} /usr/sbin/slaptest -f {{ olc_tmp }} -F {{ slapd_olc_dir }}"
   when: not olccreated.stat.exists
 
 - name: Clean OLC configuration
@@ -46,7 +46,7 @@
     state: absent
 
 - name: Load core schema
-  shell: "schema2ldif {{ schema_dir }}/core.schema | slapadd -b cn=config -F {{ olc_dir }}"
+  shell: "schema2ldif {{ slapd_schema_dir }}/core.schema | slapadd -b cn=config -F {{ slapd_olc_dir }}"
   when: not olccreated.stat.exists
 
 - name: Create OLC flag
