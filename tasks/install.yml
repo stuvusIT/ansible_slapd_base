@@ -1,5 +1,5 @@
 ---
-- name: Install required apt packages
+- name: Install required packages (apt)
   apt:
     name: "{{ item }}"
   with_items:
@@ -8,7 +8,7 @@
     - schema2ldif
   when: ansible_pkg_mgr == "apt"
 
-- name: Install required pacman packages
+- name: Install required packages (pacman)
   pacman:
     name: "{{ item }}"
   with_items:
@@ -24,7 +24,7 @@
     group: root
   when: ansible_pkg_mgr == "pacman"
 
-- name: Create new slapd mdb location
+- name: Create slapd mdb location
   file:
     path: "{{ db_dir }}"
     state: directory
@@ -32,7 +32,7 @@
     group: "{{ slapd_group }}"
     mode: 0770
 
-- name: Create new slapd OLC location
+- name: Create slapd OLC location
   file:
     path: "{{ olc_dir }}"
     state: directory
