@@ -24,6 +24,17 @@
     group: root
   when: ansible_pkg_mgr == "pacman"
 
+- name: Check if mdb was wiped
+  stat:
+    path: "{{ mdbwiped_flag }}"
+  register: mdbwiped
+
+- name: Wipe default mdb
+  file:
+    path: "{{ db_dir }}"
+    state: absent
+  when: not mdbwiped.stat.exists
+
 - name: Create slapd mdb location
   file:
     path: "{{ db_dir }}"
@@ -31,6 +42,12 @@
     owner: "{{ slapd_user }}"
     group: "{{ slapd_group }}"
     mode: 0770
+
+- name: Create mdb wipe flag
+  file:
+    path: "{{ mdbwiped_flag }}"
+    state: touch
+  when: not mdbwiped.stat.exists
 
 - name: Create slapd OLC location
   file:

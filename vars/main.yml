@@ -1,3 +1,4 @@
 ---
 olccreated_flag: "{{ flags_dir }}/.olccreated.flag"
+mdbwiped_flag: "{{ flags_dir }}/.mdbwiped.flag"
 olc_tmp: /tmp/olc.conf
