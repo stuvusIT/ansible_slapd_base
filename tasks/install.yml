@@ -1,4 +1,10 @@
 ---
+- name: Update repositories cache (apt)
+  apt:
+    update_cache: yes
+  changed_when: false
+  when: ansible_pkg_mgr == "apt"
+
 - name: Install required packages (apt)
   apt:
     name: "{{ item }}"
@@ -7,6 +13,12 @@
     - ldap-utils
     - schema2ldif
   when: ansible_pkg_mgr == "apt"
+
+- name: Update repositories cache (pacman)
+  pacman:
+    update_cache: yes
+  changed_when: false
+  when: ansible_pkg_mgr == "pacman"
 
 - name: Install required packages (pacman)
   pacman:
