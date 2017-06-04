@@ -2,11 +2,11 @@
 - name: Start slapd
   service:
     name: slapd.service
-    state: running
+    state: started
   when: olccreated.stat.exists and not unitfile.changed
 
 - name: Restart slapd
   service:
     name: slapd.service
-    state: started
+    state: restarted
   when: not olccreated.stat.exists or unitfile.changed
