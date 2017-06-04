@@ -49,6 +49,14 @@
   shell: "schema2ldif {{ slapd_schema_dir }}/core.schema | slapadd -b cn=config -F {{ slapd_olc_dir }}"
   when: not olccreated.stat.exists
 
+- name: Give the LDAP user back ownership
+  file:
+    path: "{{ slapd_olc_dir }}"
+    owner: "{{ slapd_user }}"
+    group: "{{ slapd_group }}"
+    mode: 0750
+    recurse: yes
+
 - name: Create OLC flag
   file:
     path: "{{ olccreated_flag }}"
