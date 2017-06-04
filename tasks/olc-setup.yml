@@ -56,7 +56,7 @@
     path: "{{ slapd_olc_dir }}"
     owner: "{{ slapd_user }}"
     group: "{{ slapd_group }}"
-    mode: 0750
+    mode: 0770
     recurse: yes
 
 - name: Create OLC flag
