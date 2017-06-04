@@ -8,5 +8,5 @@
 - name: Restart slapd
   service:
     name: slapd.service
-    state: running
+    state: started
   when: not olccreated.stat.exists or unitfile.changed
