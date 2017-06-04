@@ -37,9 +37,7 @@
 
 # Not using become the user may be overridden
 - name: Apply basic OLC configuration
-  command: "/usr/sbin/slaptest -f {{ olc_tmp }} -F {{ slapd_olc_dir }}"
-  become: yes
-  become_user: "{{ slapd_user }}"
+  command: "/usr/bin/sudo -u {{ slapd_user }} /usr/sbin/slaptest -f {{ olc_tmp }} -F {{ slapd_olc_dir }}"
   when: not olccreated.stat.exists
 
 - name: Clean OLC configuration
