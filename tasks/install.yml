@@ -43,13 +43,13 @@
 
 - name: Wipe default mdb
   file:
-    path: "{{ db_dir }}"
+    path: "{{ slapd_mdb_dir }}"
     state: absent
   when: not mdbwiped.stat.exists
 
 - name: Create slapd mdb location
   file:
-    path: "{{ db_dir }}"
+    path: "{{ slapd_mdb_dir }}"
     state: directory
     owner: "{{ slapd_user }}"
     group: "{{ slapd_group }}"

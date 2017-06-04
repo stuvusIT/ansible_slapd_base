@@ -9,4 +9,4 @@
     slapd_schema_dir: "{{ slapd_schema_dir }}"
     slapd_user: "{{ slapd_user }}"
     slapd_group: "{{ slapd_group }}"
-    slapd_olc_rootdn: "{{ olc_rootdn }}"
+    slapd_olc_rootdn: "{{ slapd_olc_rootdn }}"
