@@ -15,11 +15,10 @@ A dpkg- or pacman-based Linux distribution.
 
 ## Role Variables
 
-The role allows to set a number of variables.
-All variables are required.
+The role allows to set a number of variables:
 
-| Name                        | Default                     | Description                                                         |
-|-----------------------------|-----------------------------|---------------------------------------------------------------------|
+| Name                        | Default/Required            | Description                                                         |
+|-----------------------------|:---------------------------:|---------------------------------------------------------------------|
 | `slapd_run_dir`             | `/run/slapd`                | Runtime directory for args file, pid file and ldapi socket          |
 | `slapd_ldapi_socket`        | `{{slapd_run_dir}}/ldapi`   | ldapi unix socket for local slapd administration                    |
 | `slapd_mdb_dir`             | `/var/lib/slapd`            | Directory for the mdb. The directory is created, but the mdb is not |
@@ -30,7 +29,7 @@ All variables are required.
 | `slapd_user`                | `openldap`                  | User under which slapd runs                                         |
 | `slapd_group`               | `{{slapd_user}}`            | Group under which slapd runs                                        |
 | `slapd_olc_rootdn`          | `cn=root,cn=config`         | Rootdn of the OLC                                                   |
-| `slapd_olc_rootdn_password` |                             | Password for the OLC rootdn                                         |
+| `slapd_olc_rootdn_password` | :heavy_check_mark:          | Password for the OLC rootdn                                         |
 
 All of the variables prefixed with `slapd_` are exposed as facts for other roles.
 The only exception is `slapd_olc_rootdn_password` for security purposes.
