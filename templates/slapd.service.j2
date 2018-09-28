@@ -6,7 +6,7 @@ OnFailure=unit-failed@%n.service
 
 [Service]
 Type=forking
-ExecStart=/usr/sbin/slapd -u {{ slapd_user }} -g {{ slapd_group }} -F {{ slapd_olc_dir }} -h 'ldapi://{{ slapd_ldapi_socket | urlencode() | regex_replace('/', '%2F') }} ldap://[::] ldaps://[::]'
+ExecStart=/usr/sbin/slapd -u {{ slapd_user }} -g {{ slapd_group }} -F {{ slapd_olc_dir }} -h 'ldapi://{{ slapd_ldapi_socket | urlencode() | regex_replace('/', '%%2F') }} ldap://[::] ldaps://[::]'
 PIDFile={{ slapd_run_dir }}/slapd.pid
 SyslogFacility=local4
 # Security
