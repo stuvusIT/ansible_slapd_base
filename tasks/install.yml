@@ -7,8 +7,9 @@
 
 - name: Install required packages (apt)
   apt:
-    name: "{{ item }}"
-  with_items:
+    name: "{{ packages }}"
+  vars:
+    packages:
     - slapd
     - ldap-utils
     - schema2ldif
@@ -22,8 +23,9 @@
 
 - name: Install required packages (pacman)
   pacman:
-    name: "{{ item }}"
-  with_items:
+    name: "{{ packages }}"
+  vars:
+    packages:
     - openldap
   when: ansible_pkg_mgr == "pacman"
 
