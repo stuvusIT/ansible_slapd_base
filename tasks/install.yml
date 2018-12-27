@@ -7,12 +7,10 @@
 
 - name: Install required packages (apt)
   apt:
-    name: "{{ packages }}"
-  vars:
-    packages:
-    - slapd
-    - ldap-utils
-    - schema2ldif
+    name:
+      - slapd
+      - ldap-utils
+      - schema2ldif
   when: ansible_pkg_mgr == "apt"
 
 - name: Update repositories cache (pacman)
@@ -23,10 +21,8 @@
 
 - name: Install required packages (pacman)
   pacman:
-    name: "{{ packages }}"
-  vars:
-    packages:
-    - openldap
+    name: 
+      - openldap
   when: ansible_pkg_mgr == "pacman"
 
 - name: Get schema2ldif
