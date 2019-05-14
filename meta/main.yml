@@ -9,17 +9,9 @@ galaxy_info:
   min_ansible_version: 2.0
 
   platforms:
-  - name: Ubuntu
-    versions:
-    - xenial
-    - yakkety
   - name: Debian
     versions:
-    - jessie
-  - name: ArchLinux
-    versions:
-    - all
-    - any
+    - stretch
 
   galaxy_tags:
     - slapd

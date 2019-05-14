@@ -11,7 +11,7 @@ For this purpose, flag files are created and their existence is checked in later
 
 ## Requirements
 
-A dpkg- or pacman-based Linux distribution.
+Debian
 
 ## Role Variables
 

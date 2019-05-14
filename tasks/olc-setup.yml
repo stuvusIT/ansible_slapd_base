@@ -63,4 +63,3 @@
     path: "{{ olccreated_flag }}"
     state: touch
   when: not olccreated.stat.exists
-
