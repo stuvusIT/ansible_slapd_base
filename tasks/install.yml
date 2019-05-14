@@ -1,38 +1,10 @@
 ---
-- name: Update repositories cache (apt)
-  apt:
-    update_cache: yes
-  changed_when: false
-  when: ansible_pkg_mgr == "apt"
-
-- name: Install required packages (apt)
+- name: Install required packages
   apt:
     name:
       - slapd
       - ldap-utils
       - schema2ldif
-  when: ansible_pkg_mgr == "apt"
-
-- name: Update repositories cache (pacman)
-  pacman:
-    update_cache: yes
-  changed_when: false
-  when: ansible_pkg_mgr == "pacman"
-
-- name: Install required packages (pacman)
-  pacman:
-    name: 
-      - openldap
-  when: ansible_pkg_mgr == "pacman"
-
-- name: Get schema2ldif
-  get_url:
-    url: "https://raw.githubusercontent.com/fusiondirectory/schema2ldif/master/bin/schema2ldif"
-    dest: /usr/bin/schema2ldif
-    mode: 0755
-    owner: root
-    group: root
-  when: ansible_pkg_mgr == "pacman"
 
 - name: Check if mdb was wiped
   stat:
